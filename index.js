@@ -24,8 +24,7 @@ app.get('/api/craigslistsearch', (request, response) => {
 
   const nightmare = newNightmareInstance()
 
-  console.log("received request");
-  const searchTerm = 'fender stratocaster'
+  const searchTerm = request.query.search
   const craigslistLocation = 'seattle'
   
 nightmare
