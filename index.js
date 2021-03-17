@@ -16,7 +16,10 @@ app.get('/api/craigslistsearch', (request, response) => {
   }
 
   const searchQuery = JSON.parse(request.query.search)
+  const price = JSON.parse(request.query.price)
   const { term } = searchQuery
+
+  console.log("price", price);
 
   const newNightmareInstance = () => {
     const Nightmare = require('nightmare')
@@ -37,9 +40,9 @@ app.get('/api/craigslistsearch', (request, response) => {
       .wait('#query')
       .insert('#query', term)
       .click('#go')
-      // .wait('.search-options-container')
-      // .insert("input[name='min_price']", price.min)
-      // .insert("input[name='max_price']", price.max)
+      .wait('.search-options-container')
+      .insert("input[name='min_price']", price.min)
+      .insert("input[name='max_price']", price.max)
       .click("button[type='submit']")
       .wait('#sortable-results')
       .evaluate( () => {
